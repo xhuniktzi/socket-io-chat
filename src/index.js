@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 
 const app = express();
 const server = createServer(app);
+const port = process.env.PORT || 3000;
 const io = new Server(server, {
   cors: {
     origin: true,
@@ -65,6 +66,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+server.listen(port, () => {
+  console.log(`listening on *:${port}`);
 });
