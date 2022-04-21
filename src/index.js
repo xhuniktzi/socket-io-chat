@@ -19,11 +19,6 @@ io.use((socket, next) => {
     return next(new Error("usuario invalido"));
   }
 
-  //   for (let [id, socket] of io.of("/").sockets) {
-  //     if (socket.username === username)
-  //       return next(new Error("ese usuario ya existe"));
-  //   }
-
   socket.username = username;
   next();
 });
@@ -48,20 +43,18 @@ io.on("connection", (socket) => {
       });
     }
   }
-  io.emit("users", users);
 
-  //   console.log(id_socket);
+  console.log(users);
+  io.emit("users", users);
 
   socket.emit("receive", {
     message: `Bienvenido, ${username}`,
     userID: id_socket,
     username: "Sistema",
   });
-  //   .to(id_socket)
 
   socket.on("send", ({ content, to }) => {
-    // console.log(content);
-    // console.log(to);
+    console.log(`Mensaje: ${content} -> ${to}`);
     socket.to(to).emit("receive", content);
   });
 });
