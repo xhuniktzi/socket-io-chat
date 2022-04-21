@@ -54,7 +54,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send", ({ content, to }) => {
-    console.log(`Mensaje: ${content} -> ${to}`);
+    console.log(content);
+    console.log(to);
     socket.to(to).emit("receive", content);
   });
 });
